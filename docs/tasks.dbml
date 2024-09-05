@@ -1,0 +1,14 @@
+Project todolist {
+    database_type: 'PostgreSQL'
+    Note: 'This is a simple todo list database schema'
+}
+
+Table tasks {
+    id integer [pk, increment]
+    title varchar(100) [not null]
+    description varchar(500) [not null]
+    completed boolean [default: false]
+    created_at timestamp [not null]
+    updated_at timestamp [not null]
+    deleted_at timestamp    
+}

@@ -1,0 +1,299 @@
+openapi: "3.0.3"
+info:
+  title: Tasks API
+  version: "1.0"
+  description: This is a simple API for managing tasks
+servers:
+  - url: http://localhost:8080
+    description: Local server
+tags:
+  - name: Task
+    description: Operations about tasks
+paths:
+  /tasks:
+    get:
+      tags:
+        - Task
+      summary: Get all tasks
+      description: Return all tasks
+      operationId: getAllTasks
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+            minimum: 0
+            example: 0
+          description: Page number
+        - name: size
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+            minimum: 1
+            maximum: 100
+            example: 10
+          description: Page size
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/TasksResponse"
+    post:
+      tags:
+        - Task
+      summary: Create a task
+      description: Create a new task
+      operationId: createTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTask"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "400":
+          description: Bad request
+        "422":
+          description: Unprocessable entity
+  /tasks/{id}:
+    get:
+      tags:
+        - Task
+      summary: Get task by ID
+      description: Return a task by ID
+      operationId: getTaskById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+          description: Task ID
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+    delete:
+      tags:
+        - Task
+      summary: Delete task by ID
+      description: Delete a task by ID
+      operationId: deleteTaskById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+          description: Task ID
+      responses:
+        "204":
+          description: No content
+        "400":
+          description: Bad request
+    put:
+      tags:
+        - Task
+      summary: Update task by ID
+      description: Update a task by ID
+      operationId: updateTaskById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+          description: Task ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTask"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "400":
+          description: Bad request
+        "404":
+          description: Not found"
+        "422":
+          description: Unprocessable entity
+  /tasks/{id}/complete:
+    patch:
+      tags:
+        - Task
+      summary: Complete task by ID
+      description: Complete a task by ID
+      operationId: completeTaskById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+          description: Task ID
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request"
+        "404":
+          description: Not found
+        "409":
+          description: Conflict
+  /tasks/{id}/reopen:
+    patch:
+      tags:
+        - Task
+      summary: Reopen task by ID
+      description: Reopen a task by ID
+      operationId: reopenTaskById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Task ID
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request"
+        "404":
+          description: Not found
+        "409":
+          description: Conflict
+
+components:
+  schemas:
+    CreateTask:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Task 1"
+          maxLength: 100
+        description:
+          type: string
+          example: "Description 1"
+          maxLength: 500
+      required:
+        - title
+        - description
+    UpdateTask:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Task 1"
+          maxLength: 100
+        description:
+          type: string
+          example: "Description 1"
+          maxLength: 500
+      required:
+        - title
+        - description
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        title:
+          type: string
+          example: "Task 1"
+          maxLength: 100
+        description:
+          type: string
+          example: "Description 1"
+          maxLength: 500
+        completed:
+          type: boolean
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          example: "2021-01-01T00:00:00Z"
+          description: Creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2021-01-01T00:00:00Z"
+          description: Last update timestamp
+        deletedAt:
+          type: string
+          format: date-time
+          example: "2021-01-01T00:00:00Z"
+          description: Soft delete timestamp
+    TasksResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Task"
+        pagination:
+          type: object
+          $ref: "#/components/schemas/Pagination"
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+          example: 0
+          description: Page number
+        size:
+          type: integer
+          format: int32
+          example: 10
+          description: Page size
+        total:
+          type: integer
+          format: int32
+          example: 100
+          description: Total number of tasks
+        totalPages:
+          type: integer
+          format: int32
+          example: 10
+          description: Total number of pages
