@@ -1,4 +1,4 @@
-package com.sonnesen.todolist.infrastructure.persistence.entity;
+package com.sonnesen.todolist.infrastructure.persistence.entity.task;
 
 import java.time.Instant;
 
@@ -55,13 +55,25 @@ public class TaskJPAEntity {
 
     private Instant deletedAt;
 
-    public Task toTask() {
-        return Task.with(this.id, this.title, this.description, this.completed, this.createdAt, this.updatedAt,
-                this.deletedAt);
+    public void markAsCompleted() {
+        this.completed = true;
+    }
+
+    public void reopen() {
+        this.completed = false;
+    }
+
+    public boolean isDeleted() {
+        return this.deletedAt != null;
     }
 
     public static TaskJPAEntity of(Task task) {
         return new TaskJPAEntity(task.getId(), task.getTitle(), task.getDescription(), task.isCompleted(),
                 task.getCreatedAt(), task.getUpdatedAt(), task.getDeletedAt());
+    }
+
+    public Task toTask() {
+        return Task.with(this.id, this.title, this.description, this.completed, this.createdAt, this.updatedAt,
+                this.deletedAt);
     }
 }

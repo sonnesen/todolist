@@ -2,18 +2,18 @@ package com.sonnesen.todolist.infrastructure.gateway;
 
 import java.util.Optional;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.sonnesen.todolist.domain.pagination.Pagination;
 import com.sonnesen.todolist.domain.task.entity.Task;
 import com.sonnesen.todolist.domain.task.gateway.TaskGateway;
-import com.sonnesen.todolist.infrastructure.persistence.entity.TaskJPAEntity;
+import com.sonnesen.todolist.infrastructure.persistence.entity.task.TaskJPAEntity;
 import com.sonnesen.todolist.infrastructure.persistence.repository.TaskJPARepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component("taskGateway")
 public class TaskGatewayImpl implements TaskGateway {
 
     private final TaskJPARepository taskJPARepository;
@@ -24,39 +24,36 @@ public class TaskGatewayImpl implements TaskGateway {
     }
 
     @Override
-    public Optional<Task> getTaskById(Long taskId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTaskById'");
+    public Optional<Task> getTaskById(final Long taskId) {
+        return taskJPARepository.findById(taskId).map(TaskJPAEntity::toTask);
     }
 
     @Override
-    public Pagination<Task> findAll(int page, int size) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    public Pagination<Task> findAll(final int page, final int size) {
+        final var pageable = Pageable.ofSize(size).withPage(page);
+        Page<Task> taskList = taskJPARepository.findAll(pageable).map(TaskJPAEntity::toTask);
+        return Pagination.from(taskList.getNumber(), taskList.getSize(), (int) taskList.getTotalElements(),
+                taskList.getTotalPages(), taskList.getContent());
     }
 
     @Override
-    public Task updateTask(Task newTask) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateTask'");
+    public Task updateTask(final Task newTask) {
+        return taskJPARepository.save(TaskJPAEntity.of(newTask)).toTask();
     }
 
     @Override
-    public void completeTask(Task task) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'completeTask'");
+    public void completeTask(final Task task) {
+        taskJPARepository.save(TaskJPAEntity.of(task));
     }
 
     @Override
-    public void deleteTask(Task task) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteTask'");
+    public void deleteTask(final Task task) {
+        taskJPARepository.save(TaskJPAEntity.of(task));
     }
 
     @Override
-    public void reopenTask(Task task) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reopenTask'");
+    public void reopenTask(final Task task) {
+        taskJPARepository.save(TaskJPAEntity.of(task));
     }
 
 }

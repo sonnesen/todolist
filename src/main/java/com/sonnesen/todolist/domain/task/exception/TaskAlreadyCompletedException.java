@@ -1,4 +1,4 @@
-package com.sonnesen.todolist.domain.exceptions;
+package com.sonnesen.todolist.domain.task.exception;
 
 import com.sonnesen.todolist.domain.DomainException;
 
@@ -11,4 +11,5 @@ public class TaskAlreadyCompletedException extends DomainException {
     public TaskAlreadyCompletedException(final Long taskId) {
         super(TASK_ALREADY_COMPLETED, String.format(TASK_WITH_ID_D_IS_ALREADY_COMPLETED, taskId), HTTP_STATUS_CONFLICT);
     }
+
 }

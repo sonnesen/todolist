@@ -1,4 +1,4 @@
-package com.sonnesen.todolist.application.tasks.usecase;
+package com.sonnesen.todolist.application.task.usecase;
 
 import java.time.Instant;
 
@@ -15,8 +15,7 @@ public class CreateTaskUseCase {
     private final TaskDomainService taskDomainService;
 
     public Output execute(Input input) {
-        final var task = Task.newTask(input.title(), input.description());
-        final var createdTask = taskDomainService.createTask(task);
+        final var createdTask = taskDomainService.createTask(Task.newTask(input.title(), input.description()));
         return Output.from(createdTask);
     }
 
@@ -29,7 +28,8 @@ public class CreateTaskUseCase {
         public static Output from(Task task) {
             return new Output(task.getId(), task.getTitle(), task.getDescription(), task.isCompleted(),
                     task.getCreatedAt(),
-                    task.getUpdatedAt(), task.getDeletedAt());
+                    task.getUpdatedAt(),
+                    task.getDeletedAt());
         }
     }
 }

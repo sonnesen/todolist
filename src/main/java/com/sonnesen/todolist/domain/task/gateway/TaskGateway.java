@@ -20,4 +20,5 @@ public interface TaskGateway {
     void deleteTask(Task task);
 
     void reopenTask(Task task);
+
 }

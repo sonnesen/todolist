@@ -1,4 +1,4 @@
-package com.sonnesen.todolist.domain.exceptions;
+package com.sonnesen.todolist.domain.task.exception;
 
 import com.sonnesen.todolist.domain.DomainException;
 
@@ -11,4 +11,5 @@ public class TaskNotFoundException extends DomainException {
     public TaskNotFoundException(final Long taskId) {
         super(TASK_NOT_FOUND, String.format(TASK_WITH_ID_D_NOT_FOUND, taskId), HTTP_STATUS_NOT_FOUND);
     }
+
 }

@@ -29,6 +29,14 @@ public class Task {
         this.id = id;
     }
 
+    public static Task with(final String title, final String description) {
+        return new Task(title, description);
+    }
+
+    public static Task with(final Long id, final String title, final String description) {
+        return new Task(id, title, description);
+    }
+
     public static Task newTask(final String title, final String description) {
         return new Task(title, description);
     }
@@ -52,4 +60,5 @@ public class Task {
             final Instant updatedAt, final Instant deletedAt) {
         return new Task(id, title, description, completed, createdAt, updatedAt, deletedAt);
     }
+
 }

@@ -25,7 +25,6 @@ paths:
             type: integer
             format: int32
             default: 0
-            minimum: 0
             example: 0
           description: Page number
         - name: size
@@ -35,8 +34,6 @@ paths:
             type: integer
             format: int32
             default: 10
-            minimum: 1
-            maximum: 100
             example: 10
           description: Page size
       responses:
