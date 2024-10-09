@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: todolistdb
     volumes:
-      - todolistdb-data:/var/lib/postgresql/data
+      - todolistdb-pgdata:/var/lib/postgresql/data
 
 volumes:
-  todolistdb-data:
+  todolistdb-pgdata:
