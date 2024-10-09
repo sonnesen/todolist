@@ -21,8 +21,6 @@ public class TaskGatewayImpl implements TaskGateway {
 
     @Override
     public Task createTask(final Task task) {
-        Instant now = Instant.now();
-        task.setUpdatedAt(now);
         return taskJPARepository.save(TaskJPAEntity.of(task)).toTask();
     }
 
@@ -41,27 +39,25 @@ public class TaskGatewayImpl implements TaskGateway {
 
     @Override
     public Task updateTask(final Task task) {
-        task.setUpdatedAt(Instant.now());
         return taskJPARepository.save(TaskJPAEntity.of(task)).toTask();
     }
 
     @Override
     public void completeTask(final Task task) {
-        task.setUpdatedAt(Instant.now());
         taskJPARepository.save(TaskJPAEntity.of(task));
     }
 
     @Override
     public void deleteTask(final Task task) {
+        final Instant now = Instant.now();
         if (task.getDeletedAt() == null) {
-            task.setDeletedAt(Instant.now());
+            task.setDeletedAt(now);
         }
         taskJPARepository.save(TaskJPAEntity.of(task));
     }
 
     @Override
     public void reopenTask(final Task task) {
-        task.setUpdatedAt(Instant.now());
         taskJPARepository.save(TaskJPAEntity.of(task));
     }
 

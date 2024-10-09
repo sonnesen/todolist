@@ -1,6 +1,7 @@
 package com.sonnesen.todolist.infrastructure.persistence.mongo;
 
 import java.time.Instant;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
@@ -17,14 +18,20 @@ public class TaskEntityListener extends AbstractMongoEventListener<TaskJPAEntity
     }
 
     @Override
-    public void onBeforeConvert(@NonNull BeforeConvertEvent<TaskJPAEntity> source) {
-        if (source.getSource().getId().intValue() < 1) {
+    public void onBeforeConvert(@NonNull final BeforeConvertEvent<TaskJPAEntity> source) {
+        final Long taskId = Optional.ofNullable(source.getSource().getId()).orElse(Long.valueOf(0));
+
+        if (taskId < 1) {
             source.getSource().setId(databaseSequenceGeneratorService.generateSequence(TaskJPAEntity.SEQUENCE_NAME));
         }
 
+        final Instant now = Instant.now();
+
         if (source.getSource().getCreatedAt() == null) {
-            source.getSource().setCreatedAt(Instant.now());
+            source.getSource().setCreatedAt(now);
         }
+
+        source.getSource().setUpdatedAt(now);
     }
 
 }
