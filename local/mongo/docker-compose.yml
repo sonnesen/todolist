@@ -1,0 +1,15 @@
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminpwd
+      - MONGO_INITDB_DATABASE=todolistdb
+    ports:
+      - "27017:27017"
+    volumes:
+      - todolistdb-data:/data/db
+
+volumes:
+  todolistdb-data:

@@ -7,36 +7,35 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      db:
+      mongodb:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/todolistdb
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
+      - SPRING_PROFILES_ACTIVE=prd
+      - SPRING_DATA_MONGODB_HOST=${MONGODB_HOST:-mongodb}
+      - SPRING_DATA_MONGODB_PORT=${MONGODB_PORT:-27017}
+      - SPRING_DATA_MONGODB_USERNAME=${MONGODB_USERNAME:-admin}
+      - SPRING_DATA_MONGODB_PASSWORD=${MONGODB_PASSWORD:-adminpwd}
     networks:
       - todolist-network
-  db:
-    container_name: postgresdb
-    image: postgres:16.4-alpine3.20
-    ports:
-      - "5432:5432"
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongodb
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: todolistdb
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME:-admin}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD:-adminpwd}
+      - MONGO_INITDB_DATABASE=todolistdb
+    ports:
+      - "27017:27017"
+    volumes:
+      - todolistdb-data:/data/db
     networks:
       - todolist-network
     healthcheck:
-      # Use the CMD-SHELL command to check the health
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      # Set the interval to 10 seconds
-      interval: 10s
-      # Set the timeout to 5 seconds
-      timeout: 5s
-      # Set the retries to 5
-      retries: 5
-    volumes:
-      - todolistdb-data:/var/lib/postgresql/data
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
 
 volumes:
   todolistdb-data:

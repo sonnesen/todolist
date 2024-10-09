@@ -4,15 +4,12 @@ import java.time.Instant;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.sonnesen.todolist.domain.task.entity.Task;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -21,8 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Table(name = "tasks")
+@Document(collection = "tasks")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -33,16 +29,12 @@ import lombok.ToString;
 public class TaskJPAEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = false, length = 500)
     private String description;
 
-    @Column(nullable = false)
     private boolean completed;
 
     @CreationTimestamp

@@ -29,7 +29,7 @@ public class TaskDomainService {
     @NonNull
     private final DomainEventPublisher domainEventPublisher;
 
-    public void completeTask(final Long taskId) {
+    public void completeTask(final String taskId) {
         final var task = taskGateway.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException(taskId));
 
@@ -47,7 +47,7 @@ public class TaskDomainService {
         domainEventPublisher.publish(event);
     }
 
-    public void reopenTask(final Long taskId) {
+    public void reopenTask(final String taskId) {
         final var task = taskGateway.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException(taskId));
 
@@ -93,7 +93,7 @@ public class TaskDomainService {
         return updatedTask;
     }
 
-    public void deleteTaskById(final Long id) {
+    public void deleteTaskById(final String id) {
         final var task = taskGateway.getTaskById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
 
@@ -106,7 +106,7 @@ public class TaskDomainService {
         }
     }
 
-    public Task getTaskById(Long taskId) {
+    public Task getTaskById(final String taskId) {
         return taskGateway.getTaskById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException(taskId));
     }

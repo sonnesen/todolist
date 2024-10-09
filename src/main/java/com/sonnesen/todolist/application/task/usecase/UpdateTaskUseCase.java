@@ -19,11 +19,11 @@ public class UpdateTaskUseCase {
         return Output.from(task);
     }
 
-    public record Input(Long id, String title, String description) {
+    public record Input(String id, String title, String description) {
 
     }
 
-    public record Output(Long id, String title, String description, boolean completed, Instant createdAt,
+    public record Output(String id, String title, String description, boolean completed, Instant createdAt,
             Instant updatedAt, Instant deletedAt) {
 
         public static Output from(Task task) {

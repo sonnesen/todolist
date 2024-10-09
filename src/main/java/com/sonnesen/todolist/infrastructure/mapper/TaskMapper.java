@@ -58,7 +58,7 @@ public class TaskMapper {
         return new CreateTaskUseCase.Input(dto.getTitle(), dto.getDescription());
     }
 
-    public UpdateTaskUseCase.Input from(final Long id, final UpdateTaskDTO task) {
+    public UpdateTaskUseCase.Input from(final String id, final UpdateTaskDTO task) {
         return new UpdateTaskUseCase.Input(id, task.getTitle(), task.getDescription());
     }
 

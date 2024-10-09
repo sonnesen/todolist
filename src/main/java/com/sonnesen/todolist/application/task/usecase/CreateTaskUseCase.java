@@ -22,7 +22,7 @@ public class CreateTaskUseCase {
     public record Input(String title, String description) {
     }
 
-    public record Output(Long id, String title, String description, boolean completed, Instant createdAt,
+    public record Output(String id, String title, String description, boolean completed, Instant createdAt,
             Instant updatedAt, Instant deletedAt) {
 
         public static Output from(Task task) {
