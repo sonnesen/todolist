@@ -9,7 +9,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - todolistdb-data:/data/db
+      - todolistdb-mongodata:/data/db
 
 volumes:
-  todolistdb-data:
+  todolistdb-mongodata:
