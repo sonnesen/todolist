@@ -14,11 +14,11 @@ public class DeleteTaskUseCase {
     @NonNull
     private final TaskDomainService taskDomainService;
 
-    public void execute(final String taskId) {
+    public void execute(final Long taskId) {
         this.taskDomainService.deleteTaskById(taskId);
     }
 
-    public record Output(String id, String title, String description, boolean completed, Instant createdAt,
+    public record Output(Long id, String title, String description, boolean completed, Instant createdAt,
             Instant updatedAt, Instant deletedAt) {
 
         public static Output from(Task task) {

@@ -22,13 +22,12 @@ public class TaskGatewayImpl implements TaskGateway {
     @Override
     public Task createTask(final Task task) {
         Instant now = Instant.now();
-        task.setCreatedAt(now);
         task.setUpdatedAt(now);
         return taskJPARepository.save(TaskJPAEntity.of(task)).toTask();
     }
 
     @Override
-    public Optional<Task> getTaskById(final String taskId) {
+    public Optional<Task> getTaskById(final Long taskId) {
         return taskJPARepository.findById(taskId).map(TaskJPAEntity::toTask);
     }
 

@@ -55,10 +55,10 @@ Content-Type: application/json
 GET http://localhost:8080/tasks
 
 ### Get a task
-GET http://localhost:8080/tasks/67051426266dae2cf3f70dd6
+GET http://localhost:8080/tasks/1
 
 ### Update a task
-PUT http://localhost:8080/tasks/6705fbd5e873282694357f88
+PUT http://localhost:8080/tasks/1
 Content-Type: application/json
 
 {
@@ -67,7 +67,7 @@ Content-Type: application/json
 }
 
 ### Update another task
-PUT http://localhost:8080/tasks/6705fbcfe873282694357f85
+PUT http://localhost:8080/tasks/2
 Content-Type: application/json
 
 {
@@ -76,16 +76,16 @@ Content-Type: application/json
 }
 
 ### Delete a task
-DELETE http://localhost:8080/tasks/6705fbcfe873282694357f85
+DELETE http://localhost:8080/tasks/5
 
 ### Complete a valid task
-PATCH http://localhost:8080/tasks/6705fbcbe873282694357f84/complete
+PATCH http://localhost:8080/tasks/1/complete
 
 ### Complete an invalid task
-PATCH http://localhost:8080/tasks/6705fbcbe873282694357f84/complete
+PATCH http://localhost:8080/tasks/1/complete
 
 ### Reopen a valid task
-PATCH http://localhost:8080/tasks/6705fbcbe873282694357f84/reopen
+PATCH http://localhost:8080/tasks/1/reopen
 
 ### Reopen an invalid task
-PATCH http://localhost:8080/tasks/6705fbcbe873282694357f84/reopen
+PATCH http://localhost:8080/tasks/1/reopen

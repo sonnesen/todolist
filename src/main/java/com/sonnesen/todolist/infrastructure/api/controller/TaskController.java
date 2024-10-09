@@ -50,7 +50,7 @@ public class TaskController implements TasksApi {
     }
 
     @Override
-    public ResponseEntity<TaskDTO> getTaskById(final String id) {
+    public ResponseEntity<TaskDTO> getTaskById(final Long id) {
         final var task = getTaskByIdUseCase.execute(id);
         final var taskDTO = taskMapper.toDTO(task);
         return ResponseEntity.ok(taskDTO);
@@ -63,25 +63,25 @@ public class TaskController implements TasksApi {
     }
 
     @Override
-    public ResponseEntity<TaskDTO> updateTaskById(final String id, final UpdateTaskDTO task) {
+    public ResponseEntity<TaskDTO> updateTaskById(final Long id, final UpdateTaskDTO task) {
         final var updatedTask = updateTaskUseCase.execute(taskMapper.from(id, task));
         return ResponseEntity.ok(taskMapper.toDTO(updatedTask));
     }
 
     @Override
-    public ResponseEntity<Void> deleteTaskById(final String id) {
+    public ResponseEntity<Void> deleteTaskById(final Long id) {
         deleteTaskUseCase.execute(id);
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<Void> completeTaskById(final String id) {
+    public ResponseEntity<Void> completeTaskById(final Long id) {
         completeTaskUseCase.execute(id);
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<Void> reopenTaskById(final String id) {
+    public ResponseEntity<Void> reopenTaskById(final Long id) {
         reopenTaskUseCase.execute(id);
         return ResponseEntity.noContent().build();
     }

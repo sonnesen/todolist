@@ -11,10 +11,10 @@ import lombok.ToString;
 @ToString
 public class TaskDeletedEvent implements DomainEvent {
 
-    private final String taskId;
+    private final Long taskId;
     private Instant occurredOn;
 
-    public TaskDeletedEvent(final String taskId) {
+    public TaskDeletedEvent(final Long taskId) {
         this.taskId = taskId;
         this.occurredOn = Instant.now();
     }

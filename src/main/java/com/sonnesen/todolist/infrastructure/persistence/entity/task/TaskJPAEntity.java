@@ -10,6 +10,7 @@ import com.sonnesen.todolist.domain.task.entity.Task;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -28,8 +29,11 @@ import lombok.ToString;
 @Builder
 public class TaskJPAEntity {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "tasks_sequence";
+
     @Id
-    private String id;
+    private Long id;
 
     private String title;
 

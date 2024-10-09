@@ -8,7 +8,7 @@ public class TaskNotCompletedException extends DomainException {
     private static final String TASK_WITH_ID_D_IS_NOT_COMPLETED = "Task with id %s is not completed";
     private static final String TASK_NOT_COMPLETED = "Task not completed";
 
-    public TaskNotCompletedException(final String taskId) {
+    public TaskNotCompletedException(final Long taskId) {
         super(TASK_NOT_COMPLETED, String.format(TASK_WITH_ID_D_IS_NOT_COMPLETED, taskId), HTTP_STATUS_CONFLICT);
     }
 

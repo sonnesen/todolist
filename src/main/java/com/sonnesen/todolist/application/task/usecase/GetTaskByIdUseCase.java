@@ -14,12 +14,12 @@ public class GetTaskByIdUseCase {
     @NonNull
     private final TaskDomainService taskDomainService;
 
-    public Output execute(final String taskId) {
+    public Output execute(final Long taskId) {
         final var task = taskDomainService.getTaskById(taskId);
         return Output.from(task);
     }
 
-    public record Output(String id, String title, String description, boolean completed, Instant createdAt,
+    public record Output(Long id, String title, String description, boolean completed, Instant createdAt,
             Instant updatedAt, Instant deletedAt) {
 
         public static Output from(final Task task) {

@@ -9,7 +9,7 @@ public interface TaskGateway {
 
     Task createTask(Task task);
 
-    Optional<Task> getTaskById(String taskId);
+    Optional<Task> getTaskById(Long taskId);
 
     Pagination<Task> findAll(int page, int size);
 

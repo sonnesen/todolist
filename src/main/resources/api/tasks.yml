@@ -79,8 +79,9 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: 123e4567-e89b-12d3-a456-426614174000
+            type: integer
+            format: int64
+            example: 1
           description: Task ID
       responses:
         "200":
@@ -104,8 +105,9 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: 123e4567-e89b-12d3-a456-426614174000
+            type: integer
+            format: int64
+            example: 1
           description: Task ID
       responses:
         "204":
@@ -123,8 +125,9 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: 123e4567-e89b-12d3-a456-426614174000
+            type: integer
+            format: int64
+            example: 1
           description: Task ID
       requestBody:
         required: true
@@ -157,8 +160,9 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: 123e4567-e89b-12d3-a456-426614174000
+            type: integer
+            format: int64
+            example: 1
           description: Task ID
       responses:
         "200":
@@ -181,8 +185,9 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: 123e4567-e89b-12d3-a456-426614174000
+            type: integer
+            format: int64
+            example: 1
           description: Task ID
       responses:
         "200":
@@ -228,8 +233,9 @@ components:
       type: object
       properties:
         id:
-          type: string
-          example: 123e4567-e89b-12d3-a456-426614174000
+          type: integer
+          format: int64
+          example: 1
         title:
           type: string
           example: "Task 1"

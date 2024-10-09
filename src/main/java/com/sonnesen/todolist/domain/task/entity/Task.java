@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class Task {
 
-    private String id;
+    private Long id;
     private String title;
     private String description;
     private boolean completed;
@@ -24,7 +24,7 @@ public class Task {
         this.description = description;
     }
 
-    private Task(final String id, final String title, final String description) {
+    private Task(final Long id, final String title, final String description) {
         this(title, description);
         this.id = id;
     }
@@ -33,7 +33,7 @@ public class Task {
         return new Task(title, description);
     }
 
-    public static Task with(final String id, final String title, final String description) {
+    public static Task with(final Long id, final String title, final String description) {
         return new Task(id, title, description);
     }
 
@@ -55,7 +55,7 @@ public class Task {
         return this.deletedAt != null;
     }
 
-    public static Task with(final String id, final String title, final String description, final boolean completed,
+    public static Task with(final Long id, final String title, final String description, final boolean completed,
             final Instant createdAt,
             final Instant updatedAt, final Instant deletedAt) {
         return new Task(id, title, description, completed, createdAt, updatedAt, deletedAt);

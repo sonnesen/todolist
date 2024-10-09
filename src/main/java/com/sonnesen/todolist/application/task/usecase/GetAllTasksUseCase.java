@@ -19,7 +19,7 @@ public class GetAllTasksUseCase {
         return taskDomainService.listAllTasks(page, size).map(Output::from);
     }
 
-    public record Output(String id, String title, String description, boolean completed, Instant createdAt,
+    public record Output(Long id, String title, String description, boolean completed, Instant createdAt,
             Instant updatedAt, Instant deletedAt) {
 
         public static Output from(final Task task) {
