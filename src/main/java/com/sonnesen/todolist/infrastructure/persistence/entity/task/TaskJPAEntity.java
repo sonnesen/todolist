@@ -2,13 +2,10 @@ package com.sonnesen.todolist.infrastructure.persistence.entity.task;
 
 import java.time.Instant;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.sonnesen.todolist.domain.task.entity.Task;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
@@ -41,12 +38,8 @@ public class TaskJPAEntity {
 
     private boolean completed;
 
-    @CreationTimestamp
-    @Column(nullable = false)
     private Instant createdAt;
 
-    @UpdateTimestamp
-    @Column(nullable = false)
     private Instant updatedAt;
 
     private Instant deletedAt;
