@@ -6,6 +6,7 @@ import com.sonnesen.todolist.domain.DomainEventPublisher;
 import com.sonnesen.todolist.domain.pagination.Pagination;
 import com.sonnesen.todolist.domain.task.entity.Task;
 import com.sonnesen.todolist.domain.task.event.TaskCompletedEvent;
+import com.sonnesen.todolist.domain.task.event.TaskCreatedEvent;
 import com.sonnesen.todolist.domain.task.event.TaskDeletedEvent;
 import com.sonnesen.todolist.domain.task.event.TaskReopenedEvent;
 import com.sonnesen.todolist.domain.task.event.TaskUpdatedEvent;
@@ -68,7 +69,7 @@ public class TaskDomainService {
     public Task createTask(final Task newTask) {
         final var createdTask = taskGateway.createTask(newTask);
 
-        final var event = new TaskCompletedEvent(createdTask.getId());
+        final var event = new TaskCreatedEvent(createdTask.getId());
         domainEventPublisher.publish(event);
 
         return createdTask;
