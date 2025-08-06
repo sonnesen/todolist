@@ -151,6 +151,10 @@
 				<version>2.18.0</version>
 				<configuration>
 					<generateBackupPoms>false</generateBackupPoms>
+					<allowSnapshots>false</allowSnapshots>
+					<allowMajorUpdates>false</allowMajorUpdates>
+					<allowMinorUpdates>true</allowMinorUpdates>
+					<allowIncrementalUpdates>true</allowIncrementalUpdates>
 				</configuration>
 			</plugin>
 		</plugins>
