@@ -1,0 +1,2 @@
+### Complete a valid task
+PATCH http://localhost:8080/tasks/5/complete

@@ -1,0 +1,44 @@
+### Create a new task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "Buy milk",
+  "description": "Need to buy milk from the store"
+}
+
+### Create a new task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "Buy eggs",
+  "description": "Need to buy eggs from the store"
+}
+
+### Create a new task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "Buy bread",
+  "description": "Need to buy bread from the store"
+}
+
+### Create a new task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "Buy butter",
+  "description": "Need to buy butter from the store"
+}
+
+### Create a new task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "Buy cheese",
+  "description": "Need to buy cheese from the store"
+}

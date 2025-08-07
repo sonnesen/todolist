@@ -1,0 +1,2 @@
+### Get a task
+GET http://localhost:8080/tasks/3

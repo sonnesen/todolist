@@ -1,0 +1,2 @@
+### Delete a task
+DELETE http://localhost:8080/tasks/5

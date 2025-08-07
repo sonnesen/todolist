@@ -1,0 +1,2 @@
+### Reopen a valid task
+PATCH http://localhost:8080/tasks/2/reopen

@@ -1,0 +1,7 @@
+### Create a new task with invalid data
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "Buy milk"
+}
